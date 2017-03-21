@@ -132,7 +132,7 @@
     }, {
       key: 'getLabelClasses',
       value: function getLabelClasses() {
-        return (0, _classnames2.default)('speck-form__label', this.props.containerClassName);
+        return (0, _classnames2.default)('speck-form__label', this.props.labelClassName);
       }
     }, {
       key: 'getFieldUUID',

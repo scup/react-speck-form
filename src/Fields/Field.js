@@ -34,7 +34,7 @@ class Field extends React.Component {
 
   getLabelClasses() {
     return classnames('speck-form__label',
-      this.props.containerClassName
+      this.props.labelClassName
     );
   }
 
