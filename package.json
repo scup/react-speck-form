@@ -1,0 +1,51 @@
+{
+  "name": "react-speck-form",
+  "version": "0.0.1",
+  "description": "A form helper integrated with speck ",
+  "main": "dist/index.js",
+  "repository": "git@bitbucket.org:sprinklr/react-speck-form.git",
+  "directories": {
+    "dist": "dist"
+  },
+  "scripts": {
+    "build": "./tools/build",
+    "build-sass": "./tools/build-sass",
+    "test": "NODE_PATH=./src mocha -w test/config/browser.js test/**/*.spec.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "author": "Bruno Agutoli <bruno.agutoli@sprinklr.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
+    "babel-cli": "^6.22.2",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es2015-modules-umd": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "brace": "^0.9.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.7.1",
+    "jsdom": "^9.11.0",
+    "mocha": "^3.2.0",
+    "node-sass": "^4.5.0",
+    "react": "^15.4.2",
+    "react-ace": "^4.1.6",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "sass-loader": "^4.1.1",
+    "speck-entity": "^0.1.5"
+  },
+  "peerDependencies": {
+    "react": "~0.14.8 || ^15.0.0",
+    "react-dom": "~0.14.8 || ^15.0.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.6.1",
+    "moment": "^2.18.0",
+    "prop-types": "^0.2.0"
+  }
+}

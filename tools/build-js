@@ -1,0 +1,1 @@
+babel --plugins transform-es2015-modules-umd src --ignore *.storybook.js --out-dir ./dist --source-maps
