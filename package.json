@@ -2,7 +2,7 @@
   "name": "react-speck-form",
   "version": "0.0.1",
   "description": "A form helper integrated with speck ",
-  "main": "dist/index.js",
+  "main": "dist/SpeckForm.js",
   "repository": "git@bitbucket.org:sprinklr/react-speck-form.git",
   "directories": {
     "dist": "dist"
