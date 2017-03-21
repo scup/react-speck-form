@@ -37,6 +37,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "sass-loader": "^4.1.1",
+    "sinon": "^2.1.0",
     "speck-entity": "^0.1.5"
   },
   "peerDependencies": {
