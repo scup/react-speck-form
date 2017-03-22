@@ -8,7 +8,7 @@ export default class SubmitField extends Field {
     const props = _.omit(this.props, [
       'label'
     ]);
-    return this.renderField('button', {
+    return this.renderField('div', {
       ...props,
       onClick: this.handleClick
     }, (label || children));
