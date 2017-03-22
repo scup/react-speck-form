@@ -108,7 +108,7 @@ class SpeckForm extends React.Component {
         this.updateValue(entityField, value);
 
         const instance = new this._Entity(this._data);
-        this.resetFields(instance.schema);
+        this.resetField(entityField, instance.schema);
 
         if (this.props.changeValidation) {
           this.validate();
@@ -164,7 +164,7 @@ class SpeckForm extends React.Component {
     const { onErrors } = this.props;
 
     const instance = new this._Entity(this._data);
-    this.resetFields(instance.schema);
+    this.resetField(entityField, instance.schema);
 
     if (!instance.valid) {
       onErrors(instance.errors);
@@ -202,6 +202,12 @@ class SpeckForm extends React.Component {
         this._errorListeners[entityField].setError();
       }
     });
+  }
+
+  resetField(entityField, schema) {
+    if ((entityField in this._errorListeners)) {
+      this._errorListeners[entityField].reset();
+    }
   }
 
   resetFields(schema) {

@@ -217,7 +217,7 @@
             _this3.updateValue(entityField, value);
 
             var instance = new _this3._Entity(_this3._data);
-            _this3.resetFields(instance.schema);
+            _this3.resetField(entityField, instance.schema);
 
             if (_this3.props.changeValidation) {
               _this3.validate();
@@ -280,7 +280,7 @@
 
 
         var instance = new this._Entity(this._data);
-        this.resetFields(instance.schema);
+        this.resetField(entityField, instance.schema);
 
         if (!instance.valid) {
           onErrors(instance.errors);
@@ -324,6 +324,13 @@
             _this4._errorListeners[entityField].setError();
           }
         });
+      }
+    }, {
+      key: 'resetField',
+      value: function resetField(entityField, schema) {
+        if (entityField in this._errorListeners) {
+          this._errorListeners[entityField].reset();
+        }
       }
     }, {
       key: 'resetFields',
