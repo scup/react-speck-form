@@ -57,6 +57,7 @@ class Field extends React.Component {
       'entityField',
       'labelClassName',
       'datetime-local',
+      'changeValidation',
       'containerClassName'
     ]);
 
@@ -107,7 +108,7 @@ class Field extends React.Component {
 
   onChange = () => {
     const { onChange } = this.context;
-    onChange(this.getFieldName(), this.node.value);
+    onChange(this.getFieldName(), this.node.value, this.props.changeValidation);
   }
 
   componentDidMount() {
@@ -133,7 +134,12 @@ Field.propTypes = {
   className: React.PropTypes.string,
   entityField: React.PropTypes.string,
   labelClassName: React.PropTypes.string,
+  changeValidation: React.PropTypes.bool,
   containerClassName: React.PropTypes.string
+};
+
+Field.defaultProps = {
+  changeValidation: false
 };
 
 Field.contextTypes = {

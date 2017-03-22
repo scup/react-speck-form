@@ -213,9 +213,18 @@
               _this3.disableSubmit();
             }
           },
-          onChange: function onChange(entityField, value) {
+          onChange: function onChange(entityField, value, changeValidation) {
             _this3.updateValue(entityField, value);
-            _this3.validate(_this3._data);
+
+            if (_this3.props.changeValidation) {
+              _this3.validate();
+              return;
+            }
+
+            if (changeValidation) {
+              _this3.validateEntityField(entityField);
+              return;
+            }
           },
           onSubmit: function onSubmit() {
             if (_this3.validate(_this3._data)) {
@@ -262,6 +271,26 @@
         return true;
       }
     }, {
+      key: 'validateEntityField',
+      value: function validateEntityField(entityField) {
+        var onErrors = this.props.onErrors;
+
+
+        var instance = new this._Entity(this._data);
+        this.resetFields(instance.schema);
+
+        if (!instance.valid) {
+          onErrors(instance.errors);
+          this.showWarnings(instance.errors);
+          this.setFieldError(entityField, instance.errors);
+          this.disableSubmit();
+          return false;
+        }
+
+        this.enableSubmit();
+        return true;
+      }
+    }, {
       key: 'enableSubmit',
       value: function enableSubmit() {
         if (this._errorListeners.btnSubmit) {
@@ -273,6 +302,13 @@
       value: function disableSubmit() {
         if (this._errorListeners.btnSubmit) {
           this._errorListeners.btnSubmit.setError();
+        }
+      }
+    }, {
+      key: 'setFieldError',
+      value: function setFieldError(entityField, errors) {
+        if (entityField in errors) {
+          this._errorListeners[entityField].setError();
         }
       }
     }, {
@@ -345,6 +381,7 @@
     data: _react2.default.PropTypes.object,
     className: _react2.default.PropTypes.string,
     entityValidator: _react2.default.PropTypes.func.isRequired,
+    changeValidation: _react2.default.PropTypes.bool.isRequired,
     children: _react2.default.PropTypes.any,
     onSubmit: _react2.default.PropTypes.func,
     onErrors: _react2.default.PropTypes.func
@@ -354,6 +391,7 @@
     preventSubmit: true,
     showWarnings: true,
     disableLabel: false,
+    changeValidation: false,
     onSubmit: function onSubmit() {},
     onErrors: function onErrors() {},
     data: {}

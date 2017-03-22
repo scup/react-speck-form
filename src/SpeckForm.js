@@ -104,9 +104,18 @@ class SpeckForm extends React.Component {
           this.disableSubmit();
         }
       },
-      onChange: (entityField, value) => {
+      onChange: (entityField, value, changeValidation) => {
         this.updateValue(entityField, value);
-        this.validate(this._data);
+
+        if (this.props.changeValidation) {
+          this.validate();
+          return;
+        }
+
+        if (changeValidation) {
+          this.validateEntityField(entityField);
+          return;
+        }
       },
       onSubmit: () => {
         if (this.validate(this._data)) {
@@ -148,6 +157,24 @@ class SpeckForm extends React.Component {
     return true;
   }
 
+  validateEntityField(entityField) {
+    const { onErrors } = this.props;
+
+    const instance = new this._Entity(this._data);
+    this.resetFields(instance.schema);
+
+    if (!instance.valid) {
+      onErrors(instance.errors);
+      this.showWarnings(instance.errors);
+      this.setFieldError(entityField, instance.errors);
+      this.disableSubmit();
+      return false;
+    }
+
+    this.enableSubmit();
+    return true;
+  }
+
   enableSubmit() {
     if (this._errorListeners.btnSubmit) {
       this._errorListeners.btnSubmit.reset();
@@ -157,6 +184,12 @@ class SpeckForm extends React.Component {
   disableSubmit() {
     if (this._errorListeners.btnSubmit) {
       this._errorListeners.btnSubmit.setError();
+    }
+  }
+
+  setFieldError(entityField, errors) {
+    if ((entityField in errors)) {
+      this._errorListeners[entityField].setError();
     }
   }
 
@@ -214,6 +247,7 @@ SpeckForm.propTypes = {
   data: React.PropTypes.object,
   className: React.PropTypes.string,
   entityValidator: React.PropTypes.func.isRequired,
+  changeValidation: React.PropTypes.bool.isRequired,
   children: React.PropTypes.any,
   onSubmit: React.PropTypes.func,
   onErrors: React.PropTypes.func
@@ -223,6 +257,7 @@ SpeckForm.defaultProps = {
   preventSubmit: true,
   showWarnings: true,
   disableLabel: false,
+  changeValidation: false,
   onSubmit: () => {},
   onErrors: () => {},
   data: {}

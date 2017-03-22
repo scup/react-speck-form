@@ -98,7 +98,7 @@
       _this.onChange = function () {
         var onChange = _this.context.onChange;
 
-        onChange(_this.getFieldName(), _this.node.value);
+        onChange(_this.getFieldName(), _this.node.value, _this.props.changeValidation);
       };
 
       var value = void 0;
@@ -153,7 +153,7 @@
 
         var fieldName = this.getFieldName();
 
-        var otherProps = _lodash2.default.omit(fieldProps, ['label', 'children', 'className', 'entityField', 'labelClassName', 'datetime-local', 'containerClassName']);
+        var otherProps = _lodash2.default.omit(fieldProps, ['label', 'children', 'className', 'entityField', 'labelClassName', 'datetime-local', 'changeValidation', 'containerClassName']);
 
         var attrs = Object.assign({
           id: UUID,
@@ -220,7 +220,12 @@
     className: _react2.default.PropTypes.string,
     entityField: _react2.default.PropTypes.string,
     labelClassName: _react2.default.PropTypes.string,
+    changeValidation: _react2.default.PropTypes.bool,
     containerClassName: _react2.default.PropTypes.string
+  };
+
+  Field.defaultProps = {
+    changeValidation: false
   };
 
   Field.contextTypes = {
