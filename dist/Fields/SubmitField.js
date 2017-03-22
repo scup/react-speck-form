@@ -120,7 +120,7 @@
             children = _props.children;
 
         var props = _lodash2.default.omit(this.props, ['label']);
-        return this.renderField('button', _extends({}, props, {
+        return this.renderField('div', _extends({}, props, {
           onClick: this.handleClick
         }), label || children);
       }
