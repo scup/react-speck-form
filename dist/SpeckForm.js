@@ -216,6 +216,9 @@
           onChange: function onChange(entityField, value, changeValidation) {
             _this3.updateValue(entityField, value);
 
+            var instance = new _this3._Entity(_this3._data);
+            _this3.resetFields(instance.schema);
+
             if (_this3.props.changeValidation) {
               _this3.validate();
               return;

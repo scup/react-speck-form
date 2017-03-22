@@ -29,7 +29,11 @@ class Field extends React.Component {
   }
 
   getFieldClasses() {
-    return classnames(this.props.className, 'speck-form__field__input');
+    return classnames('speck-form__field__input', 
+      this.props.className, {
+        [`${this.props.className}--error`]: !this.state.isValid
+      }
+    );
   }
 
   getLabelClasses() {
@@ -94,7 +98,7 @@ class Field extends React.Component {
     return classnames('speck-form__container',
       this.props.containerClassName,
       `speck-form__container--${this.getFieldName()}`, {
-        'speck-form__container--error': !this.state.isValid
+        'has-error': !this.state.isValid
       });
   }
 

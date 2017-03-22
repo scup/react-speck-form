@@ -10,7 +10,7 @@
     factory(mod.exports, global.react, global.uuid, global.lodash, global.classnames);
     global.Field = mod.exports;
   }
-})(this, function (exports, _react, _uuid, _lodash, _classnames) {
+})(this, function (exports, _react, _uuid, _lodash, _classnames2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -23,12 +23,27 @@
 
   var _lodash2 = _interopRequireDefault(_lodash);
 
-  var _classnames2 = _interopRequireDefault(_classnames);
+  var _classnames3 = _interopRequireDefault(_classnames2);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
       default: obj
     };
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -127,12 +142,12 @@
     }, {
       key: 'getFieldClasses',
       value: function getFieldClasses() {
-        return (0, _classnames2.default)(this.props.className, 'speck-form__field__input');
+        return (0, _classnames3.default)('speck-form__field__input', this.props.className, _defineProperty({}, this.props.className + '--error', !this.state.isValid));
       }
     }, {
       key: 'getLabelClasses',
       value: function getLabelClasses() {
-        return (0, _classnames2.default)('speck-form__label', this.props.labelClassName);
+        return (0, _classnames3.default)('speck-form__label', this.props.labelClassName);
       }
     }, {
       key: 'getFieldUUID',
@@ -188,8 +203,8 @@
     }, {
       key: 'getContainerClasses',
       value: function getContainerClasses() {
-        return (0, _classnames2.default)('speck-form__container', this.props.containerClassName, 'speck-form__container--' + this.getFieldName(), {
-          'speck-form__container--error': !this.state.isValid
+        return (0, _classnames3.default)('speck-form__container', this.props.containerClassName, 'speck-form__container--' + this.getFieldName(), {
+          'has-error': !this.state.isValid
         });
       }
     }, {
