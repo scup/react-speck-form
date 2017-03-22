@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'moment', 'classnames', './Types/TypeDiscoverer', './Fields/SubmitField', './Fields/SelectField', './Fields/TextareaField', './Fields/CustomField', './Fields/InputFieldFactory'], factory);
+    define(['exports', 'react', 'moment', 'react-scroll', 'classnames', './Types/TypeDiscoverer', './Fields/SubmitField', './Fields/SelectField', './Fields/TextareaField', './Fields/CustomField', './Fields/InputFieldFactory'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('moment'), require('classnames'), require('./Types/TypeDiscoverer'), require('./Fields/SubmitField'), require('./Fields/SelectField'), require('./Fields/TextareaField'), require('./Fields/CustomField'), require('./Fields/InputFieldFactory'));
+    factory(exports, require('react'), require('moment'), require('react-scroll'), require('classnames'), require('./Types/TypeDiscoverer'), require('./Fields/SubmitField'), require('./Fields/SelectField'), require('./Fields/TextareaField'), require('./Fields/CustomField'), require('./Fields/InputFieldFactory'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.moment, global.classnames, global.TypeDiscoverer, global.SubmitField, global.SelectField, global.TextareaField, global.CustomField, global.InputFieldFactory);
+    factory(mod.exports, global.react, global.moment, global.reactScroll, global.classnames, global.TypeDiscoverer, global.SubmitField, global.SelectField, global.TextareaField, global.CustomField, global.InputFieldFactory);
     global.SpeckForm = mod.exports;
   }
-})(this, function (exports, _react, _moment, _classnames, _TypeDiscoverer, _SubmitField2, _SelectField, _TextareaField2, _CustomField2, _InputFieldFactory) {
+})(this, function (exports, _react, _moment, _reactScroll, _classnames, _TypeDiscoverer, _SubmitField2, _SelectField, _TextareaField2, _CustomField2, _InputFieldFactory) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -21,6 +21,8 @@
   var _react2 = _interopRequireDefault(_react);
 
   var _moment2 = _interopRequireDefault(_moment);
+
+  var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
   var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -90,6 +92,9 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
+  var scroller = _reactScroll2.default.scroller;
+
+  // button
   exports.SubmitField = _SubmitField3.default;
   var SelectField = exports.SelectField = _SelectField2.default;
 
@@ -304,6 +309,15 @@
       key: 'disableSubmit',
       value: function disableSubmit() {
         if (this._errorListeners.btnSubmit) {
+          if (this.props.smoothScrollingErrors) {
+            var instance = new this._Entity(this._data);
+            for (var entityField in this._data) {
+              if (entityField in instance.errors) {
+                scroller.scrollTo(entityField, this.props.smoothScrollingErrorsOptions);
+                break;
+              }
+            }
+          }
           this._errorListeners.btnSubmit.setError();
         }
       }
@@ -394,7 +408,9 @@
     changeValidation: _react2.default.PropTypes.bool.isRequired,
     children: _react2.default.PropTypes.any,
     onSubmit: _react2.default.PropTypes.func,
-    onErrors: _react2.default.PropTypes.func
+    onErrors: _react2.default.PropTypes.func,
+    smoothScrollingErrors: _react2.default.PropTypes.bool,
+    smoothScrollingErrorsOptions: _react2.default.PropTypes.object
   };
 
   SpeckForm.defaultProps = {
@@ -402,6 +418,13 @@
     showWarnings: true,
     disableLabel: false,
     changeValidation: false,
+    smoothScrollingErrors: false,
+    smoothScrollingErrorsOptions: {
+      duration: 300,
+      delay: 100,
+      smooth: true,
+      offset: -50
+    },
     onSubmit: function onSubmit() {},
     onErrors: function onErrors() {},
     data: {}

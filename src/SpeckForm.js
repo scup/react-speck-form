@@ -1,7 +1,10 @@
 import React from 'react';
 import moment from 'moment';
+import Scroll from 'react-scroll';
 import classnames from 'classnames';
 import TypeDiscoverer from './Types/TypeDiscoverer';
+
+const scroller = Scroll.scroller;
 
 // button
 export SubmitField from './Fields/SubmitField';
@@ -186,6 +189,15 @@ class SpeckForm extends React.Component {
 
   disableSubmit() {
     if (this._errorListeners.btnSubmit) {
+      if (this.props.smoothScrollingErrors) {
+        const instance = new this._Entity(this._data);
+        for(let entityField in this._data) {
+          if ((entityField in instance.errors)) {
+            scroller.scrollTo(entityField, this.props.smoothScrollingErrorsOptions);
+            break;
+          }
+        }
+      }
       this._errorListeners.btnSubmit.setError();
     }
   }
@@ -259,7 +271,9 @@ SpeckForm.propTypes = {
   changeValidation: React.PropTypes.bool.isRequired,
   children: React.PropTypes.any,
   onSubmit: React.PropTypes.func,
-  onErrors: React.PropTypes.func
+  onErrors: React.PropTypes.func,
+  smoothScrollingErrors: React.PropTypes.bool,
+  smoothScrollingErrorsOptions: React.PropTypes.object
 };
 
 SpeckForm.defaultProps = {
@@ -267,6 +281,13 @@ SpeckForm.defaultProps = {
   showWarnings: true,
   disableLabel: false,
   changeValidation: false,
+  smoothScrollingErrors: false,
+  smoothScrollingErrorsOptions: {
+    duration: 300,
+    delay: 100,
+    smooth: true,
+    offset: -50
+  },
   onSubmit: () => {},
   onErrors: () => {},
   data: {}

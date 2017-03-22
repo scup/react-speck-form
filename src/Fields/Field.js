@@ -1,7 +1,10 @@
 import React from 'react';
 import uuid from 'uuid';
 import _ from 'lodash';
+import Scroll from 'react-scroll';
 import classnames from 'classnames';
+
+const ScrollElement = Scroll.Element;
 
 class Field extends React.Component {
   constructor(props, context) {
@@ -29,7 +32,7 @@ class Field extends React.Component {
   }
 
   getFieldClasses() {
-    return classnames('speck-form__field__input', 
+    return classnames('speck-form__field__input',
       this.props.className, {
         [`${this.props.className}--error`]: !this.state.isValid
       }
@@ -87,10 +90,12 @@ class Field extends React.Component {
     }
 
     return (
-      <section className={this.getContainerClasses()}>
-        {renderLabel}
-        {React.createElement(name, attrs, children)}
-      </section>
+      <ScrollElement name={this.getFieldName()}>
+        <section className={this.getContainerClasses()}>
+          {renderLabel}
+          {React.createElement(name, attrs, children)}
+        </section>
+      </ScrollElement>
     );
   }
 

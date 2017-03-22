@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'uuid', 'lodash', 'classnames'], factory);
+    define(['exports', 'react', 'uuid', 'lodash', 'react-scroll', 'classnames'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('uuid'), require('lodash'), require('classnames'));
+    factory(exports, require('react'), require('uuid'), require('lodash'), require('react-scroll'), require('classnames'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.uuid, global.lodash, global.classnames);
+    factory(mod.exports, global.react, global.uuid, global.lodash, global.reactScroll, global.classnames);
     global.Field = mod.exports;
   }
-})(this, function (exports, _react, _uuid, _lodash, _classnames2) {
+})(this, function (exports, _react, _uuid, _lodash, _reactScroll, _classnames2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -22,6 +22,8 @@
   var _uuid2 = _interopRequireDefault(_uuid);
 
   var _lodash2 = _interopRequireDefault(_lodash);
+
+  var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
   var _classnames3 = _interopRequireDefault(_classnames2);
 
@@ -93,6 +95,8 @@
     });
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
+
+  var ScrollElement = _reactScroll2.default.Element;
 
   var Field = function (_React$Component) {
     _inherits(Field, _React$Component);
@@ -194,10 +198,14 @@
         }
 
         return _react2.default.createElement(
-          'section',
-          { className: this.getContainerClasses() },
-          renderLabel,
-          _react2.default.createElement(name, attrs, children)
+          ScrollElement,
+          { name: this.getFieldName() },
+          _react2.default.createElement(
+            'section',
+            { className: this.getContainerClasses() },
+            renderLabel,
+            _react2.default.createElement(name, attrs, children)
+          )
         );
       }
     }, {
