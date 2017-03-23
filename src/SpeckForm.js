@@ -126,6 +126,23 @@ class SpeckForm extends React.Component {
       onSubmit: () => {
         if (this.validate(this._data)) {
           this.props.onSubmit(this._data);
+          return;
+        }
+
+        if (this.props.smoothScrollingErrors) {
+          const instance = new this._Entity(this._data);
+          for(let entityField in this._data) {
+            if ((entityField in instance.errors)) {
+              const options = Object.assign({
+                duration: 300,
+                delay: 100,
+                smooth: true,
+                offset: -50
+              }, this.props.smoothScrollingErrorsOptions);
+              scroller.scrollTo(entityField, options);
+              break;
+            }
+          }
         }
       }
     };
@@ -189,15 +206,6 @@ class SpeckForm extends React.Component {
 
   disableSubmit() {
     if (this._errorListeners.btnSubmit) {
-      if (this.props.smoothScrollingErrors) {
-        const instance = new this._Entity(this._data);
-        for(let entityField in this._data) {
-          if ((entityField in instance.errors)) {
-            scroller.scrollTo(entityField, this.props.smoothScrollingErrorsOptions);
-            break;
-          }
-        }
-      }
       this._errorListeners.btnSubmit.setError();
     }
   }
@@ -282,12 +290,7 @@ SpeckForm.defaultProps = {
   disableLabel: false,
   changeValidation: false,
   smoothScrollingErrors: false,
-  smoothScrollingErrorsOptions: {
-    duration: 300,
-    delay: 100,
-    smooth: true,
-    offset: -50
-  },
+  smoothScrollingErrorsOptions: {},
   onSubmit: () => {},
   onErrors: () => {},
   data: {}

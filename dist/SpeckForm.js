@@ -237,6 +237,23 @@
           onSubmit: function onSubmit() {
             if (_this3.validate(_this3._data)) {
               _this3.props.onSubmit(_this3._data);
+              return;
+            }
+
+            if (_this3.props.smoothScrollingErrors) {
+              var instance = new _this3._Entity(_this3._data);
+              for (var entityField in _this3._data) {
+                if (entityField in instance.errors) {
+                  var options = Object.assign({
+                    duration: 300,
+                    delay: 100,
+                    smooth: true,
+                    offset: -50
+                  }, _this3.props.smoothScrollingErrorsOptions);
+                  scroller.scrollTo(entityField, options);
+                  break;
+                }
+              }
             }
           }
         };
@@ -309,15 +326,6 @@
       key: 'disableSubmit',
       value: function disableSubmit() {
         if (this._errorListeners.btnSubmit) {
-          if (this.props.smoothScrollingErrors) {
-            var instance = new this._Entity(this._data);
-            for (var entityField in this._data) {
-              if (entityField in instance.errors) {
-                scroller.scrollTo(entityField, this.props.smoothScrollingErrorsOptions);
-                break;
-              }
-            }
-          }
           this._errorListeners.btnSubmit.setError();
         }
       }
@@ -419,12 +427,7 @@
     disableLabel: false,
     changeValidation: false,
     smoothScrollingErrors: false,
-    smoothScrollingErrorsOptions: {
-      duration: 300,
-      delay: 100,
-      smooth: true,
-      offset: -50
-    },
+    smoothScrollingErrorsOptions: {},
     onSubmit: function onSubmit() {},
     onErrors: function onErrors() {},
     data: {}
