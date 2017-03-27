@@ -16,7 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.SpeckFormScaffold = exports.inputFieldFactory = exports.DatetimeLocalField = exports.DateField = exports.PasswordField = exports.NumberField = exports.EmailField = exports.ColorField = exports.RangeField = exports.CheckboxField = exports.RadioField = exports.TextField = exports.CustomField = exports.TextareaField = exports.SelectField = exports.SubmitField = undefined;
+  exports.SpeckFormScaffold = exports.inputFieldFactory = exports.DatetimeLocalField = exports.DateField = exports.PasswordField = exports.HiddenField = exports.NumberField = exports.EmailField = exports.ColorField = exports.RangeField = exports.CheckboxField = exports.RadioField = exports.TextField = exports.CustomField = exports.TextareaField = exports.SelectField = exports.SubmitField = undefined;
 
   var _react2 = _interopRequireDefault(_react);
 
@@ -107,6 +107,7 @@
   var ColorField = exports.ColorField = (0, _InputFieldFactory2.default)('color');
   var EmailField = exports.EmailField = (0, _InputFieldFactory2.default)('email');
   var NumberField = exports.NumberField = (0, _InputFieldFactory2.default)('number');
+  var HiddenField = exports.HiddenField = (0, _InputFieldFactory2.default)('hidden');
   var PasswordField = exports.PasswordField = (0, _InputFieldFactory2.default)('password');
   var DateField = exports.DateField = (0, _InputFieldFactory2.default)('date');
 

@@ -25,6 +25,7 @@ export const RangeField = InputFieldFactory('range');
 export const ColorField = InputFieldFactory('color');
 export const EmailField = InputFieldFactory('email');
 export const NumberField = InputFieldFactory('number');
+export const HiddenField = InputFieldFactory('hidden');
 export const PasswordField = InputFieldFactory('password');
 export const DateField = InputFieldFactory('date');
 
