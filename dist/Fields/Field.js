@@ -132,8 +132,6 @@
         isValid: true,
         value: value
       };
-
-      console.log(_this);
       return _this;
     }
 

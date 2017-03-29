@@ -22,8 +22,6 @@ class Field extends React.Component {
       isValid: true,
       value
     };
-
-    console.log(this);
   }
 
   getFieldName() {
