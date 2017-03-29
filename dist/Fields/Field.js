@@ -132,6 +132,8 @@
         isValid: true,
         value: value
       };
+
+      console.log(_this);
       return _this;
     }
 
@@ -195,6 +197,10 @@
             { htmlFor: attrs.id, className: this.getLabelClasses() },
             label
           );
+        }
+
+        if (fieldProps.type === 'hidden') {
+          return _react2.default.createElement(name, attrs, children);
         }
 
         return _react2.default.createElement(

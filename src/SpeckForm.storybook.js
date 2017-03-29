@@ -22,6 +22,7 @@ import SpeckForm, {
   TextareaField,
   SelectField,
   CustomField,
+  HiddenField,
   SpeckFormScaffold
 } from './SpeckForm';
 
@@ -41,6 +42,7 @@ storiesOf('SpeckForm', module)
       entityValidator={ExampleEntity}
       onSubmit={action('onSubmit')}
       onErrors={action('onErrors')}>
+      <HiddenField entityField="my_hidden_input" />
       <TextField label="Text Field: " entityField="my_text_prop" />
       <SelectField label="Select Field: " entityField="my_textarea_prop">
         <option value="">--</option>

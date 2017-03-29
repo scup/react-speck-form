@@ -22,6 +22,8 @@ class Field extends React.Component {
       isValid: true,
       value
     };
+
+    console.log(this);
   }
 
   getFieldName() {
@@ -87,6 +89,10 @@ class Field extends React.Component {
           {label}
         </label>
       );
+    }
+
+    if (fieldProps.type === 'hidden') {
+      return React.createElement(name, attrs, children);
     }
 
     return (
