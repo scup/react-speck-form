@@ -122,11 +122,10 @@
 
       var value = void 0;
       if (context && props) {
-        value = context.data[_this.getFieldName()] || '';
+        value = context.data[_this.getFieldName()] || props.value || props.defaultValue || '';
       }
 
       _this.typeName;
-
       _this.value = value;
       _this.state = {
         isValid: true,
@@ -237,6 +236,15 @@
           reset: this.reset,
           setError: this.setError
         });
+      }
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(nextProps) {
+        var onChange = this.context.onChange;
+
+        if (this.typeName === 'hidden') {
+          onChange(this.getFieldName(), nextProps.value, this.props.changeValidation);
+        }
       }
     }]);
 

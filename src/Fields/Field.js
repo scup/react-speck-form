@@ -12,11 +12,10 @@ class Field extends React.Component {
 
     let value;
     if (context && props) {
-      value = context.data[this.getFieldName()] || '';
+      value = context.data[this.getFieldName()] || props.value || props.defaultValue || '';
     }
 
     this.typeName;
-
     this.value = value;
     this.state = {
       isValid: true,
@@ -140,6 +139,13 @@ class Field extends React.Component {
       reset: this.reset,
       setError: this.setError
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { onChange } = this.context;
+    if (this.typeName === 'hidden') {
+      onChange(this.getFieldName(), nextProps.value, this.props.changeValidation);
+    }
   }
 }
 

@@ -220,6 +220,7 @@
             }
           },
           onChange: function onChange(entityField, value, changeValidation) {
+            console.log('aquiiii', entityField);
             _this3.updateValue(entityField, value);
 
             var instance = new _this3._Entity(_this3._data);
