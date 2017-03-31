@@ -197,6 +197,9 @@
         }
 
         if (fieldProps.type === 'hidden') {
+          if (attrs.value && attrs.defaultValue) {
+            delete attrs.defaultValue;
+          }
           return _react2.default.createElement(name, attrs, children);
         }
 
