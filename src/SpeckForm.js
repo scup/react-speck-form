@@ -109,7 +109,6 @@ class SpeckForm extends React.Component {
         }
       },
       onChange: (entityField, value, changeValidation) => {
-        console.log('aquiiii', entityField);
         this.updateValue(entityField, value);
 
         const instance = new this._Entity(this._data);
